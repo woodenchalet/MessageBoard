@@ -1,0 +1,59 @@
+<html>
+    
+    
+        <head>
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        
+        <title>
+        hello world
+        </title>
+        </head>
+    
+    
+    
+    <body>
+        <p id ="front">Please tell me what do you want to say.</p>
+        
+        <textarea rows="2" cols="20" id="text">
+        </textarea>
+		
+        <br>
+        
+        <button id="send">send</button>
+        
+    </body>
+    
+    <script>
+        $(document).ready(function(){
+		
+		$.post("fetch.php",
+		{send:"ok"},
+		function(data,ts){
+				var messages = data;
+				$(data).appendTo("#front");
+			}
+		);
+		
+		
+		
+            $("#send").click(function(){
+           //alert("hello world");
+           // alert($("#text").val());
+           $.post("sever.php",
+            {
+                message: $("#text").val(),
+            },
+			function(data,ts){
+				var messages = data;
+				$("<p>" + data + "</p>").appendTo("#front");
+			}
+			);
+			
+    
+            });
+        });
+    </script>
+    
+     
+    
+</html>
